@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: photography
+      POSTGRES_USER: photography
+      POSTGRES_PASSWORD: photography
+    ports:
+      - "5433:5432"
+    volumes:
+      - photography-postgres:/var/lib/postgresql
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U photography -d photography"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  photography-postgres:

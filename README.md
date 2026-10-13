@@ -10,4 +10,16 @@ Business platform for the public portfolio, private client galleries, and studio
 - PostgreSQL 18 on private Amazon RDS in `eu-west-2`
 - Private S3 media, CloudFront, SQS, and SES
 
+## Local
+
+PostgreSQL runs in Docker. The database password in `.env.example` is for that container.
+
+```bash
+docker compose up -d
+composer install
+cp .env.example .env
+php artisan key:generate
+composer check
+```
+
 
